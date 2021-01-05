@@ -1,5 +1,9 @@
 from distutils.core import setup
 
+import setuptools
+
+_ = setuptools.__version__
+
 setup(
     name='junkyard',
     version='1.0',
@@ -8,6 +12,7 @@ setup(
         'junkyard/maintained', 'junkyard/unmaintained',
         'junkyard/maintained/distributions',
         'junkyard/maintained/preprocessing',
+        'junkyard/maintained/sports',
     ],
     install_requires=['numpy', 'scipy'],
     url='https://turingequations.com',
