@@ -52,8 +52,8 @@ def get_true_odds(o, r):
 
 def get_market_margin(p):
     """
-    https://www.bettingexpert.com/academy/advanced-betting-theory/calculating-bookmaker-commission
     Market Margin = sum(p)
+    https://www.bettingexpert.com/academy/advanced-betting-theory/calculating-bookmaker-commission
     :param p: probabilities
     :return: float
     """
