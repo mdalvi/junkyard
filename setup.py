@@ -14,7 +14,14 @@ setup(
         'junkyard/maintained/preprocessing',
         'junkyard/maintained/sports',
     ],
-    install_requires=['numpy', 'scipy', 'tensorflow>=2.0.0'],
+    install_requires=[
+        'numpy',
+        'scipy',
+
+    ],
+    extras_require={
+        "dl":  ['tensorflow>=2.0.0'],
+    },
     url='https://turingequations.com',
     license='GNU GENERAL PUBLIC LICENSE 3',
     author='mdalvi',
