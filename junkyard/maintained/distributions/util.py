@@ -4,7 +4,7 @@ import numpy as np
 from scipy.stats import norm
 
 
-def overlap_solver(mean1, std_dev1, mean2, std_dev2):
+def get_overlap(mean1, std_dev1, mean2, std_dev2):
     """
     # The probability overlap solver
     # Determines the area (in percentage) overlap between two normal distributions
