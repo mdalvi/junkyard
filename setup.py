@@ -1,5 +1,6 @@
 """
 https://github.com/cloudtools/troposphere/blob/master/setup.py
+https://dzone.com/articles/executable-package-pip-install
 """
 import os
 
@@ -44,6 +45,7 @@ setup(
         'junkyard.maintained.preprocessing',
         'junkyard.maintained.sports',
         'junkyard.unmaintained',
+        'junkyard.unmaintained.visualization',
     ],
     classifiers=[
         "Intended Audience :: Developers",
