@@ -1,5 +1,11 @@
 """
 https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4120293/
+
+How to use it:
+import asyncio
+dict_= dict()
+asyncio.create_task(plot_scalers(dict_, df, iterable));
+
 """
 import asyncio
 

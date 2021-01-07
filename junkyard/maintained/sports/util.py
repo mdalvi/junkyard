@@ -58,3 +58,13 @@ def get_market_margin(p):
     :return: float
     """
     return sum(p)
+
+
+def get_payoffs(o, bet_unit=1) -> float:
+    """
+    Returns payoffs from decimal odds
+    :param o: Decimal odds
+    :param bet_unit: Betting unit
+    :return: float
+    """
+    return round(bet_unit * o, 0) - bet_unit
