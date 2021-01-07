@@ -1,0 +1,4 @@
+# ---- Need libraries installed by setup.py
+numpy>=1.18.4
+scipy>=1.4.1
+tensorflow>=2.0.0
