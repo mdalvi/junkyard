@@ -46,6 +46,7 @@ setup(
         'junkyard.maintained.sports',
         'junkyard.unmaintained',
         'junkyard.unmaintained.visualization',
+        'junkyard.unmaintained.sports',
     ],
     classifiers=[
         "Intended Audience :: Developers",
