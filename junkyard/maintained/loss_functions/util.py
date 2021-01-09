@@ -33,6 +33,13 @@ def get_three_splits(y_true):
 
 
 def plot_keras_history(history, metric=None, metric_title="Metric"):
+    """
+    Plots keras training history (with optional metric)
+    :param history: keras.history
+    :param metric: str, metric name
+    :param metric_title: str, metric name (for tabulate)
+    :return: None
+    """
     df_ = pd.DataFrame(history.history)
 
     if metric is None:
