@@ -1,3 +1,6 @@
+from tensorflow.keras.layers import Reshape, Input, Embedding
+
+
 def get_rescale(value, actual_range=(0, 1), normal_range=(0, 1)):
     """
     https://github.com/mdalvi/evolving-networks/blob/master/evolving_networks/math_util.py#L24
@@ -20,7 +23,7 @@ def get_embedding_size(n_cat: int) -> int:
     :param n_cat: number of categories
     :return: int
     """
-    return min(600, round(1.6 * n_cat ** 0.56))
+    return int(min(600, round(1.6 * n_cat ** 0.56)))
 
 
 def get_categorical_inputs_for_dl(x_arr):
@@ -30,3 +33,29 @@ def get_categorical_inputs_for_dl(x_arr):
     :return: list
     """
     return [x_arr[:, i] for i in range(x_arr.shape[1])]
+
+
+def get_embeddings(categorical_map: list):
+    """
+    Generates embedding layers using categorical mappings
+    :param categorical_map: list, [(column_name, num_of_categories), ....]
+    :return: list, list
+    """
+    embedding_inputs = []
+    embedding_outputs = []
+    for column_name, nb_unique_classes in categorical_map:
+        assert (nb_unique_classes > 1), f"{column_name} column has nb_unique_classes <= 1"
+        embedding_size = get_embedding_size(nb_unique_classes)
+
+        # One Embedding Layer for each categorical variable
+        model_input = Input(shape=(1,))
+        model_output = Embedding(nb_unique_classes, embedding_size)(model_input)
+        model_output = Reshape(target_shape=(embedding_size,))(model_output)
+
+        embedding_inputs.append(model_input)
+        embedding_outputs.append(model_output)
+
+    return embedding_inputs, embedding_outputs
+
+
+
