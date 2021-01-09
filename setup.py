@@ -45,7 +45,7 @@ setup(
         'junkyard.maintained.preprocessing',
         'junkyard.maintained.sports',
         'junkyard.unmaintained',
-        'junkyard.unmaintained.visualization',
+        'junkyard.unmaintained.distributions',
         'junkyard.unmaintained.sports',
     ],
     classifiers=[
