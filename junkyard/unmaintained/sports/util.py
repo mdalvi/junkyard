@@ -74,8 +74,11 @@ def get_unbiased_prob_estimates(df, race_id_column, prob_column, is_win_column, 
             [f"{a:.3f}-{b:.3f}", n, f"{round(exp, 3):.3f}", f"{round(act, 3):.3f}", f"{round(act - exp, 3):.3f}"])
 
     n = df_[(df_[prob_column] > ranges[-1][1])].shape[0]
-    act = df_[(df_[prob_column] > ranges[-1][1]) & (df_[is_win_column] == 1)].shape[0] / n
-    exp = df_[(df_[prob_column] > ranges[-1][1])][prob_column].mean()
+    if n == 0:
+        act, exp = 0., 0.
+    else:
+        act = df_[(df_[prob_column] > ranges[-1][1]) & (df_[is_win_column] == 1)].shape[0] / n
+        exp = df_[(df_[prob_column] > ranges[-1][1])][prob_column].mean()
     table.append(
         [f">{ranges[-1][1]:.3f}", n, f"{round(exp, 3):.3f}", f"{round(act, 3):.3f}", f"{round(act - exp, 3):.3f}"])
 
