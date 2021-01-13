@@ -58,4 +58,11 @@ def get_embeddings(categorical_map: list):
     return embedding_inputs, embedding_outputs
 
 
-
+def get_batch_indices_for_dl(x_df, batch_id_column):
+    """
+    Return the indices of data frame as nested list as per batch_id
+    :param x_df: DataFrame
+    :param batch_id_column: str
+    :return: [list, list, list], list of indices of data frame as per batch indices
+    """
+    return [x_df[x_df[batch_id_column] == batch_id].index.tolist() for batch_id in x_df[batch_id_column].unique()]
