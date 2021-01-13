@@ -1,7 +1,25 @@
 import warnings
 
+import matplotlib.pyplot as plt
 import numpy as np
+import scipy.stats as ss
 from scipy.stats import norm
+
+
+def plot_normal(mu=0, sigma=1, cdf=False, **kwargs):
+    """
+    Plots the normal distribution function for a given x range
+    If mu and sigma are not provided, standard normal is plotted
+    If cdf=True cumulative distribution is plotted
+    Passes any keyword arguments to matplotlib plot function
+    https://emredjan.github.io/blog/2017/07/19/plotting-distributions/?source=post_page-----c5ebaafdeedd----------------------
+    """
+    x_range = np.linspace(mu - 3 * sigma, mu + 3 * sigma, 5000)
+    if cdf:
+        y = ss.norm.cdf(x_range, mu, sigma)
+    else:
+        y = ss.norm.pdf(x_range, mu, sigma)
+    plt.plot(x_range, y, **kwargs)
 
 
 def get_overlap(mean1, std_dev1, mean2, std_dev2):

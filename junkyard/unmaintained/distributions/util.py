@@ -41,7 +41,7 @@ def wait_for_change(widget1, widget2, widget3):  # <------ Rename to widget1, an
     return future
 
 
-def plot_distributions(df, column_name, bins):
+def plot_rescaled(df, column_name, bins):
     """
     Plots rescaled distributions side by side for visual analysis
     :param df: DataFrame
@@ -84,7 +84,7 @@ async def plot_scalers(dict_, df, iterable, bins=100, out=widgets.Output(),
             button3 = Button(description=desc3)  # <------ Rename to button1
             hb = HBox([button1, button2, button3])  # <----Display both buttons in an HBox
         display(hb)
-        plot_distributions(df, c, bins)
+        plot_rescaled(df, c, bins)
         x = await wait_for_change(button1, button2, button3)  # <---- Pass both buttons into the function
         dict_[c] = x
         clear_output(wait=True)
