@@ -8,6 +8,28 @@ from tabulate import tabulate
 from junkyard.maintained.common.util import get_parameter_vectors
 
 
+def mixture_loss(nb_dimensions=2):
+    """
+    Computes the mean negative log-likelihood loss of y given the mixture parameters.
+    https://towardsdatascience.com/a-hitchhikers-guide-to-mixture-density-networks-76b435826cca
+
+    How to use:
+    model.compile(loss=mixture_loss(nb_dimensions=2), ...)
+    """
+
+    def func(y_true, y_pred):
+        alpha, mu, sigma = get_parameter_vectors(y_pred, nb_dimensions, 3)  # Unpack parameter vectors
+
+        distr = tfp.distributions.MixtureSameFamily(
+            mixture_distribution=tfp.distributions.Categorical(probs=alpha),
+            components_distribution=tfp.distributions.Normal(loc=mu, scale=sigma))
+
+        log_likelihood = distr.log_prob(tf.transpose(y_true))  # Evaluate log-probability of y
+        return -tf.reduce_mean(log_likelihood, axis=-1)
+
+    return func
+
+
 def heteroskedastic_loss(y_true, y_pred):
     """
     Heteroskedastic Loss (Quadratic Loss Function)

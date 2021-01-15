@@ -44,6 +44,8 @@ setup(
         'junkyard.maintained.loss_functions',
         'junkyard.maintained.preprocessing',
         'junkyard.maintained.sports',
+        'junkyard.maintained.metrics',
+        'junkyard.maintained.activations',
         'junkyard.unmaintained',
         'junkyard.unmaintained.distributions',
         'junkyard.unmaintained.sports',
