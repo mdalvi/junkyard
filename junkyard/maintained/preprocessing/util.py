@@ -28,7 +28,7 @@ def get_embedding_size(n_cat: int) -> int:
 
 def get_categorical_inputs_for_dl(x_arr):
     """
-    https://machinelearningmastery.com/how-to-prepare-categorical-data-for-deep-learning-in-python/
+    https://machinelearningmastery.com/howprepare_categorical_inputs_test-to-prepare-categorical-data-for-deep-learning-in-python/
     :param x_arr: numpy array of categorical data of shape (n_samples, n_columns)
     :return: list
     """
