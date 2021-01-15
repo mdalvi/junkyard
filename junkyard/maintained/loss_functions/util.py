@@ -29,6 +29,7 @@ def heteroskedastic_loss(y_true, y_pred):
 def benters_loss(y_true, y_pred):
     """
     Sir William Benter's Loss
+    The loss function can be used where each batch corresponds to 1 race
     https://doi.org/10.1142/9789812819192_0019
     https://stackoverflow.com/questions/42194051/filter-out-non-zero-values-in-a-tensor
     https://stackoverflow.com/questions/51405517/how-to-iterate-through-tensors-in-custom-loss-function
