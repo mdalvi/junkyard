@@ -28,7 +28,7 @@ def get_version():
 
 setup(
     name="junkyard",
-    version="0.0.2",
+    version="0.0.3",
     author="mdalvi",
     author_email="milind.dalvi14@gmail.com",
     description="A bunch of utilities that I use and don't use during development",
@@ -49,6 +49,7 @@ setup(
         'junkyard.unmaintained',
         'junkyard.unmaintained.distributions',
         'junkyard.unmaintained.sports',
+        'junkyard.unmaintained.loss_functions',
     ],
     classifiers=[
         "Intended Audience :: Developers",

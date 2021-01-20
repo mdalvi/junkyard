@@ -1,6 +1,9 @@
 def get_p2o(p):
     """
     Probability to decimal odds
+    https://en.wikipedia.org/wiki/Parimutuel_betting
+    http://www.aussportsbetting.com/guide/sports-betting-arbitrage/
+    http://www.aussportsbetting.com/tools/online-calculators/arbitrage-calculator/
     https://www.bettingexpert.com/academy/advanced-betting-theory/calculating-bookmaker-commission
     p: probability
     :return: float
@@ -11,6 +14,7 @@ def get_p2o(p):
 def get_o2p(o):
     """
     Decimal odds to probability
+    https://en.wikipedia.org/wiki/Parimutuel_betting
     https://www.bettingexpert.com/academy/advanced-betting-theory/calculating-bookmaker-commission
     o: decimal odds
     :return: float
