@@ -56,20 +56,27 @@ def benters_loss(y_true, y_pred):
     n = tf.shape(y_true)[0]
     mu, sigma = get_parameter_vectors(y_pred, 1, 2)
 
-    y_true, y_speed = get_parameter_vectors(y_true, 1, 2)
-    term1 = heteroskedastic_loss(y_true, y_pred)
+    yt, y_speed = get_parameter_vectors(y_true, 1, 2)
+    term1 = heteroskedastic_loss(yt, y_pred)
 
     _, i = tf.math.top_k(tf.reshape(y_speed, [n, ]), k=n, sorted=True)
     mu = tf.gather(mu, indices=i)
     sigma = tf.gather(sigma, indices=i)
 
-    tf_false = tf.cast(tf.zeros_like(y_true), dtype=tf.bool)
-    tf_true = tf.cast(tf.ones_like(y_true), dtype=tf.bool)
-
+    # winner mu and sigma
     mu1 = mu[0]
-    mu2 = tf.math.reduce_min(mu[1:])
     sigma1 = sigma[0]
-    sigma2 = tf.boolean_mask(sigma, tf.where(mu == mu2, tf_true, tf_false))
+
+    # finding the probable runner-up using monte carlo simulations ~ 10000
+    distr = tfp.distributions.Normal(loc=mu[1:], scale=sigma[1:])
+    win_percentage = tf.math.bincount(
+        tf.cast(tf.reshape(tf.math.argmin(distr.sample((10000,)), axis=1), (10000,)), dtype=tf.int32)) / tf.constant(
+        10000)
+    runner_up_index = tf.math.argmax(win_percentage)
+
+    # runner-up mu and sigma
+    mu2 = mu[1:][runner_up_index]
+    sigma2 = sigma[1:][runner_up_index]
 
     dist = tfp.distributions.Normal(0, 1)
     prob = dist.cdf(-(mu1 - mu2) / tf.math.sqrt(sigma1 + sigma2))

@@ -28,7 +28,7 @@ def get_version():
 
 setup(
     name="junkyard",
-    version="0.0.3",
+    version="0.0.4",
     author="mdalvi",
     author_email="milind.dalvi14@gmail.com",
     description="A bunch of utilities that I use and don't use during development",

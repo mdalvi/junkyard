@@ -1,2 +1,2 @@
 python setup.py bdist_wheel
-python -m pip install --upgrade dist/junkyard-0.0.1-py3-none-any.whl
+python -m pip install --upgrade dist/junkyard-0.0.4-py3-none-any.whl
