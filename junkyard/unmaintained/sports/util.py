@@ -1,7 +1,37 @@
 import matplotlib.dates as mdates
 import matplotlib.pyplot as plt
+import numpy as np
 import pandas as pd
 from tabulate import tabulate
+
+from junkyard.maintained.sports.util import get_payoffs, get_market_margin, get_commission_rate, get_o2p
+
+
+def get_pari_mutuel_bet_effect(decimal_odds, pool_size, bet_index, bet_size):
+    """
+    https://stackoverflow.com/questions/35215161/most-efficient-way-to-map-function-over-numpy-array
+    """
+
+    decimal_probs = np.array(list(map(get_o2p, decimal_odds)))
+    market_margin = get_market_margin(decimal_probs)
+    commission_rate = np.array(list(map(get_commission_rate, np.ones(decimal_odds.shape) * market_margin)))
+    reverse_pi_h = (1. - commission_rate) / decimal_odds
+    reverse_w_h = reverse_pi_h * pool_size
+    reverse_w_h[bet_index] += bet_size
+    w = np.sum(reverse_w_h)
+    pi_h = reverse_w_h / w
+    decimal_odds_new = (np.round((1 - commission_rate - pi_h) / pi_h, 2)) + 1.
+    return get_payoffs(decimal_odds_new[bet_index], bet_size)
+
+
+def get_pari_mutuel_max_bet(decimal_odds, pool_size, bet_index):
+    """
+    https://stackoverflow.com/questions/35215161/most-efficient-way-to-map-function-over-numpy-array
+    """
+    results = [(bet_size,
+                get_pari_mutuel_bet_effect(decimal_odds, pool_size=pool_size, bet_index=bet_index, bet_size=bet_size))
+               for bet_size in range(10, pool_size, 10)]
+    return max(results, key=lambda t: t[1])[0]
 
 
 def plot_public_accuracy_vs_time(df_, time_id_column, is_public_win_column, is_win_column,
